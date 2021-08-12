@@ -1,10 +1,7 @@
 package web;
 
 import com.codeup.blogapp.data.Post;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +18,7 @@ public class PostsController {
         }};
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     private Post getPostById(@PathVariable Long id) {
         if (id == 1) {
             return new Post(1L, "A new Post", "this is a brilliant post. 10/10");
@@ -29,4 +26,22 @@ public class PostsController {
             return null;
         }
     }
+
+    @PostMapping(value = "/post")
+    private void createPost(@RequestBody Post newPost) {
+        System.out.println(newPost.getTitle());
+        System.out.println(newPost.getContent());
+    }
+
+    @PutMapping("/{id}")
+    private void updatePost(@PathVariable Long id, @RequestBody Post post){
+        System.out.println(id);
+        System.out.println(post);
+    }
+    @DeleteMapping("/{id}")
+    private void deletePost(@PathVariable Long id){
+        System.out.println(id);
+    }
+
+
 }
