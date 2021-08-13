@@ -33,6 +33,7 @@ export default function router(URI) {
             },
             uri: '/posts',
             title: 'All Posts',
+            viewEvent: PostsEvent
         },
         '/about': {
             returnView: About,
