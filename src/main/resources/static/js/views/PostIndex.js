@@ -137,13 +137,9 @@ function submitEditEvent() {
             let request = {
                 method: 'DELETE',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json'
                 },
             }
-
-        })
-
-        $(this).off("click", deleteEvent)
         let id = $(this).attr("data-id")
         fetch(`http://localhost:8080/api/posts/${id}`, request)
             .then(res => {
@@ -151,11 +147,11 @@ function submitEditEvent() {
                 createView("/posts");
             }).catch(error => {
             console.log(error);
-            createPostEvent("/posts")
+            createView("/posts")
         })
 
 
-    }
+    })
 
 }
 
