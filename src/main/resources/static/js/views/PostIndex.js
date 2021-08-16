@@ -1,5 +1,5 @@
 import fetchData from "../fetchData.js";
-import createView from "../createView";
+import createView from "../createView.js";
 
 export default function PostIndex(props) {
     return `
@@ -24,9 +24,17 @@ export default function PostIndex(props) {
             <div class="post-container">
                 ${props.posts.map(post =>
         `
-                        <h3>${post.title}</h3> 
-                        <h2>${post.content}</h2>
-                        <button class="post-edit-btn" type="button" data-id="${post.id}">Edit</button>
+                     
+                        <div>
+                        
+                        <input class="edit-title" value="${post.title}" readonly>
+                        <input class="edit-content"  value="${post.content}" readonly>
+                       
+                    
+                        <button  class="edit-post-btn" type="button" data-id="${post.id}">Edit</button>
+                     
+                        <button data-id=${post.id} class="delete-post-btn">Delete</button>
+                        </div>
        <!--add edit, delete buttons, add edit form-->
         
         
@@ -38,9 +46,10 @@ export default function PostIndex(props) {
     `;
 }
 
+
 export function PostsEvent() {
-    createPostEvent()
-    editPostEvent()
+    createPostEvent();
+    editEvent();
 
 }
 
@@ -67,7 +76,7 @@ function createPostEvent() {
             //     },
             //     request)
             fetch("http://localhost:8080/api/posts/", request)
-                .then(res =>{
+                .then(res => {
                     console.log(res.status);
                     createView("/posts");
                 }).catch(error => {
@@ -81,35 +90,75 @@ function createPostEvent() {
 
 }
 
-function editPostEvent() {
 
-    $(`#post-edit-btn`).click(function () {
+function editEvent() {
+    $(".edit-post-btn").click(function () {
+        console.log("event fired off")
+        $(".edit-post-btn").text("Edit");
+        $(".edit-title, .edit-content").attr("readonly", true);
+        $(this).siblings(".edit-title, .edit-content").attr("readonly", false);
+        $(this).text("Save");
 
 
-            let post = {
-                // title: $("#title").val(),
-                // content: $("#content").val(),
-            }
-            console.log(post)
+        $(this).on("click", submitEditEvent)
 
+    })
+}
+
+function submitEditEvent() {
+    let post = {
+        title: $(this).siblings("edit-title").text(),
+        content: $(this).siblings("edit-content").text()
+    }
+    let request = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+
+        },
+        body: JSON.stringify(post)
+    }
+
+    console.log(post)
+
+    $(this).off("click", submitEditEvent)
+    let id = $(this).attr("data-id")
+    fetch(`http://localhost:8080/api/posts/${id}`, request)
+        .then(res => {
+            console.log(res.status);
+            createView("/posts");
+        }).catch(error => {
+        console.log(error);
+        createPostEvent("/posts")
+    })
+
+    function deleteEvent() {
+        $(".delete-post-btn").click(function(){
             let request = {
-                method: 'PUT',
+                method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
-
                 },
-                body: JSON.stringify(post)
             }
-            fetchData({
-                    posts: `/api/posts/${this.attr("data-id")}`
-                },
-                request)
 
-        }
-    )
-    ;
+        })
+
+        $(this).off("click", deleteEvent)
+        let id = $(this).attr("data-id")
+        fetch(`http://localhost:8080/api/posts/${id}`, request)
+            .then(res => {
+                console.log(res.status);
+                createView("/posts");
+            }).catch(error => {
+            console.log(error);
+            createPostEvent("/posts")
+        })
+
+
+    }
 
 }
+
 
 //add event listeners, get data, send fetch
 //call function for edit btns listener
