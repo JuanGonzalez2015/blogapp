@@ -133,25 +133,27 @@ function submitEditEvent() {
     })
 
     function deleteEvent() {
-        $(".delete-post-btn").click(function(){
+        $(".delete-post-btn").click(function () {
             let request = {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
                 },
             }
-        let id = $(this).attr("data-id")
-        fetch(`http://localhost:8080/api/posts/${id}`, request)
-            .then(res => {
-                console.log(res.status);
-                createView("/posts");
-            }).catch(error => {
-            console.log(error);
-            createView("/posts")
+            let id = $(this).attr("data-id")
+            fetch(`http://localhost:8080/api/posts/${id}`, request)
+                .then(res => {
+                    console.log(res.status);
+                    createView("/posts");
+                }).catch(error => {
+                console.log(error);
+                createView("/posts")
+            })
+
+
         })
 
-
-    })
+    }
 
 }
 
