@@ -28,6 +28,7 @@ export default function Register(props) {
 
 export function RegisterEvent() {
     $("#register-btn").click(function(){
+        console.log("register-clicked")
         let user = {
             username: $("#username").val(),
             email: $("#email").val(),

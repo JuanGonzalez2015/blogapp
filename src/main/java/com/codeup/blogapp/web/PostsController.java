@@ -12,7 +12,7 @@ public class PostsController {
     @GetMapping
     private List<Post> getPost() {
         return new ArrayList<>() {{
-            add(new Post(1L, "A new Post", "this is a brilliant post. 10/10"));
+            add(new Post(1L, "A new Post", "this is a brilliant post. 10/10" ));
             add(new Post(2L, "A newer Post", "this is a brilliant post. 10/10"));
             add(new Post(3L, "The new Post", "this is a brilliant post. 10/10"));
         }};

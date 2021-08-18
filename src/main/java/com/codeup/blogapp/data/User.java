@@ -10,12 +10,12 @@ public class User {
     private String username;
     private String email;
     private String password;
-//    private Date createdAt;
+    //    private Date createdAt;
     private Role role;
 
     public enum Role {USER, ADMIN};
 
-    public User(long id, String username, String email, String password/*Date createdAt, Role role*/) {
+    public User(long id, String username, String email, String password, Role role) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -72,3 +72,4 @@ public class User {
         this.role = role;
     }
 }
+
