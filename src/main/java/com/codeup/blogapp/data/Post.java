@@ -1,12 +1,25 @@
 package com.codeup.blogapp.data;
 
+import javax.persistence.*;
 import java.util.Collection;
 
+@Entity
+@Table(name="posts")
 public class Post {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable=false, length=120)
     private String title;
+
+@Column(nullable=false)
     private String content;
+
+
     private User user;
+
+
     private Collection<Category> categories;
 
 
