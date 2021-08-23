@@ -1,11 +1,13 @@
 import Home from "./views/Home.js";
-import PostIndex, {PostsEvent} from "./views/PostIndex.js";
+import PostIndex from "./views/PostIndex.js";
 import About from "./views/About.js";
 import Error404 from "./views/Error404.js";
 import Loading from "./views/Loading.js";
 import Login from "./views/Login.js";
 import LoginEvent from "./auth.js";
+import {PostsEvent} from "./views/PostIndex.js";
 import Register, {RegisterEvent} from "./views/Register.js";
+import User, {UserEvent} from "./views/User.js";
 
 /**
  * Returns the route object for a specific route based on the given URI
@@ -27,25 +29,16 @@ export default function router(URI) {
             title: "Login",
             viewEvent: LoginEvent
         },
-
-            '/register': {
-                returnView: Register,
-                state: {
-                    users: '/api/users'
-                },
-                uri: '/register',
-                title: "Register",
-                viewEvent: RegisterEvent
-
-        },
-
         '/posts': {
             returnView: PostIndex,
             state: {
-                posts: '/api/posts'
+                posts: '/api/posts',
+                categories: '/api/categories'
             },
             uri: '/posts',
             title: 'All Posts',
+            // TODO: add event callback under viewEvent property
+            // viewEvent: myEvent
             viewEvent: PostsEvent
         },
         '/about': {
@@ -65,9 +58,22 @@ export default function router(URI) {
             state: {},
             uri: location.pathname,
             title: 'Loading...',
+        },
+        '/register': {
+            returnView: Register,
+            state: {},
+            uri: '/register',
+            title: "Register",
+            viewEvent: RegisterEvent
+        },
+        '/users': {
+            returnView: User,
+            state: {users: "/api/users"},
+            uri: '/users',
+            title: "Users",
+            viewEvent: UserEvent
         }
     };
 
     return routes[URI];
 }
-

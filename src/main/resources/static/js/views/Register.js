@@ -1,50 +1,52 @@
 import createView from "../createView.js";
 
-export default function Register(props) {
-    return `<html>
-        <head>
-            <meta charSet="UTF-8"/>
-            <title>Register</title>
-        </head>
-        <body>
-            <h1>Register</h1>
+export default function Register(){
 
-            <form id="register-form">
-                <label for="username">Username</label>
-                <input id="username" name="username" type="text"/>
-                  <label for="email">Email</label>
-                <input id="email" name="email" type="text"/>
-                <label for="password">Password</label>
-                <input id="password" name="password" type="password"/>
-                <button id="register-btn" type="button" >Register</button>
-              
-
-            </form>
-        </body>
-    </html>
-`;
+    return `
+    <header>
+    <h1>Registration</h1>
+    </header>
+    <main>
+    <form>
+        <input type="text" placeholder="Username" id="username">
+        <input type="text" placeholder="Email" id="email">
+        <input type="password" placeholder="Password" class="password">
+        <button id="register-btn" type="button">Register</button>
+    </form>
+    </main>
+    
+    `;
 
 }
 
-export function RegisterEvent() {
-    $("#register-btn").click(function(){
-        console.log("register-clicked")
-        let user = {
-            username: $("#username").val(),
-            email: $("#email").val(),
-            password: $("#password").valueOf()
+export function RegisterEvent(){
 
+
+    $("#register-btn").click(function () {
+
+        let post = {
+            username: $('#username').val(),
+            email: $('#email').val(),
+            password: $('.password').val()
         }
+
+        console.log(post);
+
         let request = {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(user)
+            headers: {
+                'Accept': 'application/json',
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(post)
         };
-        console.log(request)
+
         fetch("http://localhost:8080/api/users", request)
-            .then((response) =>{
-            console.log(response.status)
-            createView("/")
-        });
+            .then((response) => {
+                console.log(response.status)
+                createView("/");
+            });
+
     })
+
 }

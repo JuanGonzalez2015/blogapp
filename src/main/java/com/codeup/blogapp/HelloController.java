@@ -8,32 +8,28 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HelloController {
+
     @GetMapping("/hello")
     @ResponseBody
-    public String hello() {
+    public String hello(){
         return "Hello, from Spring";
     }
 
     @GetMapping("/person")
     @ResponseBody
-    public Person getPerson() {
-        return new Person("Juan", "Bum");
+    public Person getPerson(){
+        return new Person("Amado", "Student");
     }
 
     @GetMapping("/hello/{name}")
     @ResponseBody
     public String sayHello(@PathVariable String name){
-        return "Hello,"  + name + "!";
+        return "Hello, " + name + "!";
     }
 
-
-
-    @Controller
-    public class HomeController {
-
-        @GetMapping("/home")
-        public String welcome() {
-            return "home";
-        }
+    @GetMapping("/home")
+    public String welcome(){
+        return "/home.html";
     }
+
 }
