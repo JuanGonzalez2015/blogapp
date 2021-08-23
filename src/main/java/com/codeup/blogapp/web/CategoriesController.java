@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping(value="/api/categories", headers="Accept=application/json")
+@RequestMapping(value="/api/categories", headers="Accept=application/json", produces = "application/json")
 public class CategoriesController {
 
     List<Category> categories = new ArrayList<>(){{

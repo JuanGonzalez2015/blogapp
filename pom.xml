@@ -15,6 +15,7 @@
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>11</java.version>
+        <springframework.version>4.3.11</springframework.version>
     </properties>
     <dependencies>
         <dependency>
