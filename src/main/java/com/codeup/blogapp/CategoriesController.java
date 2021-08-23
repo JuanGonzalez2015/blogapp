@@ -15,7 +15,7 @@ import java.util.List;
 public class CategoriesController {
 
     List<Category> categories = new ArrayList<>(){{
-        add(new Category(1L, "Spring Bootz"));
+        add(new Category(1L, "Spring"));
     }};
 
     @GetMapping
