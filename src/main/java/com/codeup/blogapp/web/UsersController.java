@@ -1,7 +1,8 @@
 package com.codeup.blogapp.web;
 
-import com.codeup.blogapp.data.User.User;
-import com.codeup.blogapp.data.User.UsersRepository;
+import com.codeup.blogapp.data.User;
+
+import com.codeup.blogapp.data.UsersRepository;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

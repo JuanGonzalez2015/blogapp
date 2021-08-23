@@ -1,7 +1,7 @@
 package com.codeup.blogapp.web;
 
-import com.codeup.blogapp.data.Post.Post;
-import com.codeup.blogapp.data.Post.PostsRepository;
+import com.codeup.blogapp.data.Post;
+import com.codeup.blogapp.data.PostsRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

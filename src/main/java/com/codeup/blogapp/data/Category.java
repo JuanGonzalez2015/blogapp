@@ -1,6 +1,8 @@
-package com.codeup.blogapp.data.Category;
+package com.codeup.blogapp.data;
 
-import com.codeup.blogapp.data.Post.Post;
+
+
+import com.codeup.blogapp.data.Post;
 
 import javax.persistence.*;
 import java.util.Collection;
