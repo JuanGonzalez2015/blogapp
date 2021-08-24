@@ -3,6 +3,7 @@ package com.codeup.blogapp.data;
 
 import com.codeup.blogapp.data.Category;
 import com.codeup.blogapp.data.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -22,7 +23,7 @@ public class Post {
     private String content;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties({"posts, password"})
     private User user;
 
     @ManyToMany(cascade = CascadeType.ALL)
