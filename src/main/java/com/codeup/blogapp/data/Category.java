@@ -1,7 +1,6 @@
-package com.codeup.blogapp.data;
+package com.codeup.blogapp.data.Category;
 
 import com.codeup.blogapp.data.Post;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -17,22 +16,17 @@ public class Category {
     @Column(nullable = false)
     private String name;
 
-    @JsonBackReference
-    private User user;
-
     @ManyToMany(
             fetch = FetchType.LAZY,
             cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH},
-            targetEntity = Category.class)
+            targetEntity = Post.class)
     @JoinTable(
-            name="post_category",
-            joinColumns = {@JoinColumn(name = "post_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name="category_id", nullable = false, updatable = false)},
+            name = "post_category",
+            joinColumns = {@JoinColumn(name = "category_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "post_id", nullable = false, updatable = false)},
             foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
             inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT)
     )
-
-//    @ManyToMany(mappedBy = "categories")
     private Collection<Post> posts;
 
     public Category(Long id, String name) {
